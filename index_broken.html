@@ -1,0 +1,86 @@
+---
+# This tells Jekyll to use the main page layout from the Minima theme.
+# It provides the header, footer, and overall page structure.
+layout: personal
+---
+
+<style>
+  .wrapper {
+    max-width: none; /* Removes the theme's width limit */
+    margin-left: 0;   /* Aligns the container to the left */
+    
+    /* We add padding so the text doesn't hit the screen edge */
+    padding-left: 30px; 
+    padding-right: 30px;
+  }
+</style>
+
+<div class="custom-home">
+  <h1>Welcome to my Corner of the Web</h1>
+  <p>A collection of my projects, thoughts, and resources.</p>
+
+  <hr>
+
+  <section class="link-group">
+    <h2>Recent Projects -- FINAL DIAGNOSTIC</h2>
+  
+    <div style="font-family: monospace; background-color: #f5f5f5; border: 1px solid #ccc; padding: 15px;">
+      
+      <h3>1. Finding Slugs from Updates:</h3>
+      {% assign slugs_in_order = site.project_updates | sort: 'date' | reverse | map: 'project_slug' | uniq %}
+      <p>Slugs found: {{ slugs_in_order | inspect }}</p>
+      
+      <hr>
+  
+      <h3>2. Finding and Validating Projects:</h3>
+      {% for slug in slugs_in_order limit:3 %}
+        <div style="border: 1px solid blue; padding: 10px; margin: 10px 0;">
+          <p><b>Attempting to find project for slug:</b> <code style="background: #e0e0ff;">'{{ slug }}'</code></p>
+          
+          {% assign found_project = false %}
+          {% for project in site.projects %}
+            {% if project.slug == slug %}
+              {% assign found_project = true %}
+              <p style="color: green; font-weight: bold;">--> MATCH FOUND!</p>
+              
+              <h4>Validating Project Data:</h4>
+              <ul>
+                <li><b>Title:</b> '{{ project.title }}' 
+                  {% if project.title %} (OK) {% else %} <b style="color:red;">(MISSING!)</b> {% endif %}
+                </li>
+                <li><b>Image:</b> '{{ project.image }}' 
+                  {% if project.image %} (OK) {% else %} <b style="color:red;">(MISSING!)</b> {% endif %}
+                </li>
+                <li><b>URL:</b> '{{ project.url }}' 
+                  {% if project.url %} (OK) {% else %} <b style="color:red;">(MISSING!)</b> {% endif %}
+                </li>
+              </ul>
+  
+              {% if project.title and project.image and project.url %}
+                <p style="color: green;"><b>Conclusion:</b> All required data is present. The box should render.</p>
+              {% else %}
+                <p style="color: red; font-weight: bold;"><b>Conclusion:</b> CRITICAL DATA IS MISSING. This is why the box is not rendering.</p>
+              {% endif %}
+  
+              {% break %}
+            {% endif %}
+          {% endfor %}
+  
+          {% if found_project == false %}
+            <p style="color: red; font-weight: bold;">--> NO MATCH FOUND for this slug.</p>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+  
+  <section class="link-group">
+    <h2>Posts</h2>
+    <ul>
+      <li><a href="/blog/">All Blog Posts</a></li>
+      <li><a href="#">Most Popular Articles</a></li>
+      <li><a href="#">Thoughts on Technology</a></li>
+    </ul>
+  </section>
+
+</div>
