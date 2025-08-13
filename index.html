@@ -1,5 +1,70 @@
-<h1>hello world</h1>
+---
+# This tells Jekyll to use the main page layout from the Minima theme.
+# It provides the header, footer, and overall page structure.
+layout: personal
+---
 
-<ul>
-  <li><a href="/posts">My Posts Page</a> - August 6, 2025</li>
-  </ul>
+<style>
+  .wrapper {
+    max-width: none !important; /* Removes the theme's width limit */
+    margin-left: 0 !important;   /* Aligns the container to the left */
+    
+    /* We add padding so the text doesn't hit the screen edge */
+    padding-left: 30px !important; 
+    padding-right: 30px !important;
+  }
+</style>
+
+<div class="custom-home">
+  <h1>This Corner of the Web</h1>
+  <p>A collection of my projects, thoughts, and resources.</p>
+
+  <hr>
+
+  <section class="link-group">
+    <h2>Recent Projects</h2>
+  
+    <div class="project-grid">
+      {% comment %}
+        Step 1: Get the project slugs, sorted by most recent update.
+      {% endcomment %}
+      {% assign slugs_in_order = site.project_updates | sort: 'date' | reverse | map: 'project_slug' | uniq %}
+  
+      {% comment %}
+        Step 2: Loop through only the first 3 slugs from our ordered list.
+        The 'limit:3' filter makes this efficient and avoids needing 'break'.
+      {% endcomment %}
+      {% for slug in slugs_in_order limit:3 %}
+  
+        {% comment %}
+          Step 3: Find the one project that matches the current slug.
+        {% endcomment %}
+        {% for project in site.projects %}
+          {% if project.slug == slug %}
+  
+            <!-- This is the code that displays the project box -->
+            <a href="{{ project.url | relative_url }}" class="project-box">
+              <div class="project-image" style="background-image: url('{{ project.image | relative_url }}');"></div>
+              <div class="project-title">
+                <h3>{{ project.title }}</h3>
+              </div>
+            </a>
+            <!-- End of the project box code -->
+  
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+    </div>
+    <p style="margin-top: 1em;"><a href="/projects/">View all projects...</a></p>
+  </section>
+  
+  <section class="link-group">
+    <h2>Posts</h2>
+    <ul>
+      <li><a href="/blog/">All Blog Posts</a></li>
+      <li><a href="#">Most Popular Articles</a></li>
+      <li><a href="#">Thoughts on Technology</a></li>
+    </ul>
+  </section>
+
+</div>

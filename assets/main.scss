@@ -1,0 +1,97 @@
+---
+# This front matter is required for Jekyll to process the file.
+---
+
+// This line imports all the default theme styles.
+@import "minima";
+
+//
+// --- Your Custom Styles ---
+//
+
+/* Styling for the project boxes on the homepage */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+  margin-top: 1em;
+}
+
+.project-box {
+  display: block;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden; /* This keeps the rounded corners on the image */
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.project-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.project-box .project-image {
+  height: 150px;
+  background-size: cover;
+  background-position: center;
+}
+
+.project-box .project-title {
+  padding: 15px;
+  background-color: #f9f9f9;
+}
+
+.project-box h3 {
+  margin: 0;
+  font-size: 1.1em;
+}
+
+/* Styling for the update cards on the project page */
+.project-updates-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.update-card-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.update-item-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  height: 100%;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.update-item-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.update-card-image {
+  height: 150px;
+  background-size: cover;
+  background-position: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.update-card-content {
+  padding: 15px;
+}
+
+.update-title {
+  margin-bottom: 0.25em;
+}
+
+.update-meta {
+  color: #828282;
+  font-size: 0.9em;
+  margin-top: 0;
+}

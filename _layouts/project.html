@@ -1,0 +1,43 @@
+---
+layout: default
+---
+<article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">{{ page.title | escape }}</h1>
+  </header>
+
+  <div class="post-content">
+    {% if page.image %}
+      <img src="{{ page.image | relative_url }}" alt="{{ page.title }} preview" style="max-width: 100%; border-radius: 8px; margin-bottom: 2em;">
+    {% endif %}
+
+    {{ content }}
+
+    <hr style="margin: 3em 0;">
+
+    <h2>Project Updates</h2>
+    <div class="project-updates-list">
+      
+      {% assign sorted_updates = site.project_updates | sort: 'date' | reverse %}
+      {% for update in sorted_updates %}
+        {% if update.project_slug == page.slug %}
+          <a href="{{ update.url | relative_url }}" class="update-card-link">
+            <article class="update-item-card">
+              {% comment %} This code finds the first image in the update's content. {% endcomment %}
+              {% assign first_image_part = update.content | split: '](' | last %}
+              {% assign first_image_url = first_image_part | split: ')' | first %}
+              {% if first_image_url contains '://' or first_image_url contains '/' %}
+                <div class="update-card-image" style="background-image: url('{{ first_image_url | relative_url }}')"></div>
+              {% endif %}
+              <div class="update-card-content">
+                <h3 class="update-title">{{ update.title }}</h3>
+                <p class="update-meta">{{ update.date | date: "%B %d, %Y" }}</p>
+              </div>
+            </article>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+</article>
