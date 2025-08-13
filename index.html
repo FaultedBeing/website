@@ -59,12 +59,21 @@ layout: personal
   </section>
   
   <section class="link-group">
-    <h2>Posts</h2>
-    <ul>
-      <li><a href="/blog/">All Blog Posts</a></li>
-      <li><a href="#">Most Popular Articles</a></li>
-      <li><a href="#">Thoughts on Technology</a></li>
-    </ul>
+    <h2>Recent Posts</h2>
+  
+    <div class="post-preview-grid">
+      {% for post in site.posts limit:3 %}
+        <a href="{{ post.url | relative_url }}" class="post-preview-box">
+          <div class="post-preview-title">
+            <h3>{{ post.title }}</h3>
+          </div>
+          <div class="post-preview-content">
+            <p>{{ post.excerpt | strip_html }}</p>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+    <p style="margin-top: 1em;"><a href="/blog/">View all posts...</a></p>
   </section>
 
 </div>
