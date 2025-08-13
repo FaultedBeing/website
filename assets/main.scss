@@ -258,3 +258,60 @@ code {
   height: 60%; /* Increased height for a smoother fade */
   background: linear-gradient(to bottom, transparent, var(--card-background-color));
 }
+
+//
+// --- Mobile Responsive Fixes ---
+//
+
+// This media query targets screens 600px wide or smaller
+@media screen and (max-width: 600px) {
+  .site-title {
+    font-size: 18px; // Your adjusted font size
+  }
+
+  // Target the description text in the footer/header
+  .site-description {
+    display: block; // Make it stack underneath the title instead of beside it
+    font-size: 14px;
+    margin-top: 5px;
+  }
+
+  // --- Styles for the mobile navigation menu ---
+  
+  // Style the hamburger icon button itself
+  .site-nav label[for="nav-trigger"] {
+    background-color: var(--card-background-color);
+    border: 1px solid transparent;
+  }
+
+  // Style the lines inside the icon
+  .menu-icon > svg path {
+    fill: var(--text-color);
+  }
+
+  // Style the dropdown menu that appears with a highly specific selector
+  header.site-header .site-nav .trigger {
+    background-color: var(--card-background-color);
+    border: 1px solid var(--card-background-color);
+    border-radius: 5px;
+  }
+
+  // Style the links inside the dropdown
+  .site-nav .page-link {
+    color: var(--text-color);
+  }
+    
+  header.site-header .site-nav {
+    background-color: var(--card-background-color) ; /* was #fdfdfd */
+    border: 1px solid var(--card-background-color) ;          /* was #e8e8e8 */
+    border-radius: 2px; /* keep the rounded look */
+  }
+
+  /* Links remain readable */
+  header.site-header .site-nav .page-link {
+    color: var(--text-color) ;
+  }
+
+}
+
+
