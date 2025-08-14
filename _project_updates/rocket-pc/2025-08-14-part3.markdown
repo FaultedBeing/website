@@ -1,7 +1,7 @@
 ---
 layout: project_update
 title:  "Part 3: Testing email systems final test"
-date:   2025-08-14
+date:   2025-08-14 15:42:00 -0500
 project_slug: rocket-pc
 ---
 
