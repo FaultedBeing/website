@@ -8,6 +8,7 @@ permalink: /blog/
 
 <p>A collection of articles and thoughts.</p>
 
+
 <hr>
 
 {%- if site.posts.size > 0 -%}
