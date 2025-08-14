@@ -4,6 +4,7 @@ title: "Rocket Fuel Cooled PC"
 date: 2025-08-12
 image: /assets/images/firehosedrink.jpeg
 slug: rocket-pc
+list_uuid: 1149a574-cc8b-44dd-aa7f-ead3f8e47a42
 ---
 Zis is a test 
 {% highlight ruby %}

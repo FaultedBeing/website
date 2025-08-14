@@ -407,4 +407,44 @@ code {
   padding-left: 5px;
 }
 
+// --- Project Page Sidebar Layout ---
 
+// --- Project Page Sidebar Layout ---
+
+// 1. Establish a positioning context for the page.
+.project-page-container {
+  position: relative;
+}
+
+// 2. The main content will behave as a normal block.
+.project-main-content {
+  max-width: 800px; // Give the content a max width for readability
+}
+
+// 3. Position the sidebar outside the main content flow on larger screens.
+.project-sidebar {
+  position: absolute;
+  top: 0;
+  left: 100%; // Start at the right edge of the main content
+  margin-left: 40px; // Add a gap
+  width: 220px; // Define a fixed width for the sidebar
+}
+
+.subscription-box {
+  background-color: var(--card-background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 20px;
+  position: sticky; // Makes the box "stick" as you scroll
+  top: 20px;
+}
+
+// 4. On smaller screens, stack the sidebar below the content.
+@media screen and (max-width: 1200px) {
+  .project-sidebar {
+    position: static; // Return to normal document flow
+    width: 100%;
+    margin-left: 0;
+    margin-top: 40px;
+  }
+}

@@ -7,37 +7,61 @@ layout: default
     <h1 class="post-title">{{ page.title | escape }}</h1>
   </header>
 
-  <div class="post-content">
-    {% if page.image %}
-      <img src="{{ page.image | relative_url }}" alt="{{ page.title }} preview" style="max-width: 100%; border-radius: 8px; margin-bottom: 2em;">
-    {% endif %}
+  <div class="project-page-container">
+    <!-- Main Content Column -->
+    <div class="project-main-content">
+      {% if page.image %}
+        <img src="{{ page.image | relative_url }}" alt="{{ page.title }} preview" style="max-width: 100%; border-radius: 8px; margin-bottom: 2em;">
+      {% endif %}
 
-    {{ content }}
+      {{ content }}
 
-    <hr style="margin: 3em 0;">
+      <hr style="margin: 3em 0;">
 
-    <h2>Project Updates</h2>
-    <div class="project-updates-list">
-      
-      {% assign sorted_updates = site.project_updates | sort: 'date' | reverse %}
-      {% for update in sorted_updates %}
-        {% if update.project_slug == page.slug %}
-          <a href="{{ update.url | relative_url }}" class="update-card-link">
-            <article class="update-item-card">
-              {% comment %} This code finds the first image in the update's content. {% endcomment %}
-              {% assign first_image_part = update.content | split: '](' | last %}
-              {% assign first_image_url = first_image_part | split: ')' | first %}
-              {% if first_image_url contains '://' or first_image_url contains '/' %}
-                <div class="update-card-image" style="background-image: url('{{ first_image_url | relative_url }}')"></div>
-              {% endif %}
-              <div class="update-card-content">
-                <h3 class="update-title">{{ update.title }}</h3>
-                <p class="update-meta">{{ update.date | date: "%B %d, %Y" }}</p>
-              </div>
-            </article>
-          </a>
-        {% endif %}
-      {% endfor %}
+      <h2>Project Updates</h2>
+      <div class="project-updates-list">
+        {% assign sorted_updates = site.project_updates | sort: 'date' | reverse %}
+        {% for update in sorted_updates %}
+          {% if update.project_slug == page.slug %}
+            <a href="{{ update.url | relative_url }}" class="update-card-link">
+              <article class="update-item-card">
+                {% assign first_image_part = update.content | split: '](' | last %}
+                {% assign first_image_url = first_image_part | split: ')' | first %}
+                {% if first_image_url contains '://' or first_image_url contains '/' %}
+                  <div class="update-card-image" style="background-image: url('{{ first_image_url | relative_url }}')"></div>
+                {% endif %}
+                <div class="update-card-content">
+                  <h3 class="update-title">{{ update.title }}</h3>
+                  <p class="update-meta">{{ update.date | date: "%B %d, %Y" }}</p>
+                </div>
+              </article>
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
     </div>
+
+    <!-- Sidebar Column -->
+    <aside class="project-sidebar">
+      {% if page.list_uuid %}
+        <div class="subscription-box">
+          <!-- This form is now dynamically generated -->
+          <form method="post" action="https://emailsettingz.maxoberg.dev/subscription/form" class="listmonk-form">
+            <div>
+              <h3>Follow this Project</h3>
+              <p style="font-size: 0.9em; color: var(--subtle-text-color); margin-top: -0.5em; margin-bottom: 1.5em;">Get email updates for this project specifically.</p>
+              <input type="hidden" name="nonce" />
+              <p><input type="email" name="email" required placeholder="E-mail" /></p>
+              <p>
+                <!-- The list UUID is dynamically inserted here -->
+                <input id="{{ page.list_uuid }}" type="hidden" name="l" checked value="{{ page.list_uuid }}" />
+              </p>
+              <p><input type="submit" value="Subscribe" /></p>
+            </div>
+          </form>
+        </div>
+      {% endif %}
+    </aside>
+  </div>
 
 </article>

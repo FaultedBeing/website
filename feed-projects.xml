@@ -1,0 +1,21 @@
+---
+layout: null
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>{{ site.title | xml_escape }} - All Project Updates</title>
+    <description>{{ site.description | xml_escape }}</description>
+    <link>{{ site.url }}{{ site.baseurl }}/</link>
+    <atom:link href="{{ "/feed-projects.xml" | absolute_url }}" rel="self" type="application/rss+xml" />
+    {% for update in site.project_updates limit:10 %}
+      <item>
+        <title>{{ update.title | xml_escape }}</title>
+        <description>{{ update.content | xml_escape }}</description>
+        <pubDate>{{ update.date | date_to_rfc822 }}</pubDate>
+        <link>{{ update.url | absolute_url }}</link>
+        <guid isPermaLink="true">{{ update.url | absolute_url }}</guid>
+      </item>
+    {% endfor %}
+  </channel>
+</rss>
