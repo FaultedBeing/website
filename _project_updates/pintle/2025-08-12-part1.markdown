@@ -1,0 +1,82 @@
+---
+layout: project_update
+title:  "So You Want to Design a Pintle Injector: Version 1"
+date:   2025-08-14 23:39:11 -0500
+project_slug: pintle
+---
+
+#### an introduction and guidelines
+
+(and way more details on how I designed an injector than you probably ever need, all in the the context of Herald’s development)
+By Max Oberg
+
+
+
+
+
+
+
+
+**Warning**: This was written in the context of Caltech's PARSEC Rocketry Group's work, and was meant to be an introductuory resource for brand new members who wanted to learn more. I tried to make it as least jargony as possible, and make it (to the degree I could possible) the least worst to read. There will be bad joke attempts scattered through out, and it was written as informally as a mildly composed text message. It also uses old images of hardware designs, and things that I have long since changed, but until I have the time to go back over this, I'm presenting it as is. With that context: enjoy......
+
+The original PDF link can be found here/on my [github][pintlepdf]
+
+
+**Warning 2** : Units are everywhere. I may be referring to kg in one section, and lbs in the next. I wish it
+wasn't this way but someone decided to ignore the French in the 1800s and now it's out of my hands.
+Screw you 1950s paper on annular orifice discharge coefficients specifically. (And for future reference,
+Herald is an engine developed by the Parsec team at Caltech)
+
+
+## Nomenclature
+
+ṁ = mass flow rate
+⍴ = density
+𝑢 = velocity
+Cd = Discharge Coefficient
+V̇ = volumetric flow rate
+A = area
+ΔP = pressure difference/stiffness
+N = number of central pintle shaft orifices
+d = diameter
+BF = Blockage Factor
+
+_(1950s paper terms below)_
+
+G = mass flow rate through an orifice, ṁ/area
+μ = fluid absolute viscosity
+CC = coefficient of stream contraction in an orifice
+F = fraction of maximum pressure recovery due to
+stream expansion from the vena contracta to full
+annulus area actually recovered in an orifice
+𝑓𝑝 = friction factor for flow between parallel plates of
+
+infinite width
+_Z_ = concentric annular length-to-width ratio
+L = orifice thickness/length
+
+#### Subscripts
+
+```
+exp = expected
+ideal = value dealing with ideal flow
+fuel = value dealing with fuel characteristics
+ox = value dealing with oxidizer characteristics
+p = dealing with pintle shaft
+oa = outer annular orifice
+```
+## Introduction
+
+```
+Every rocket engine will typically have a few preset parameters before you approach the design
+of an injector, fuel/oxidizer choice, mixture ratio and mass flow rates of your propellants, and the chamber
+pressure of your engine.
+Before we use these values however, some aspects of fluids need to be discussed. Injectors on a
+fundamental level are plates of metal with holes in them. One of the only questions that needs to be
+asked is how big to make said holes. With a certain set mass flow rate, density, and injection velocity, one
+can calculate an ideal area for which the hole (or orifice) should be ideally sized. This can be seen below.
+```
+
+I have not finished converting this to a markdown format and will return to finish this.
+
+[pintlepdf]: https://maxoberg.dev/assets/files/So you want to design a pintle injector.pdf

@@ -5,17 +5,8 @@ date: 2025-08-13
 image: /assets/images/early-injector.png
 slug: pintle
 ---
-Zis is a test 
-{% highlight ruby %}
-def print_hi(name)
-  puts "Hi, #{name}"
-end
-print_hi('Tom')
-#=> prints 'Hi, Tom' to STDOUT.
-{% endhighlight %}
 
-Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll Talk][jekyll-talk].
+This project's goal is to create a written paper about pintle injector characteristics in a testing environment using pressurized water to somewhat match the Reynolds number of flow that is representative of an actual pintle rocket injector.
 
-[jekyll-docs]: https://jekyllrb.com/docs/home
-[jekyll-gh]:   https://github.com/jekyll/jekyll
-[jekyll-talk]: https://talk.jekyllrb.com/
+The goal is to characterize the changes in flows in a representative variable area pintle injector at different throttle rates. Checking for instabilities in the flow, mixing effectiveness, and momentum ratios Now, I am going to expand on all of this more later. However, For the initial part of this project , I will leave it updated with a document I created in an attempt to create a paper that can act as a general introduction to how to design a pintle injector, written so that you need basically no prerequisite knowledge beforehand. 
+
