@@ -1,8 +1,9 @@
 ---
 layout: project_update
-title:  "Part 4: Testing email systems final final test"
-date:   2025-08-14 16:13:00 -0500
+title:  "Part 5: Testing email systems final final final test"
+date:   2025-08-14 16:20:00 -0500
 project_slug: rocket-pc
+image: /assets/images/rocket-pc-case.jpg
 ---
 
 (I hope I remeber to delete this test text) (just please work)
