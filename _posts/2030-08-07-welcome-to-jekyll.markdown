@@ -1,10 +1,10 @@
 ---
 layout: post
-title:  "AWS Lambda Test3"
-date:   2025-08-14 
-description: "Testing if all of the Ai generated code I am running on AWS Lambda is actually running correctly"
+title:  "I'm going to use this as a formatting template"
+date:   2030-08-07 12:36:27 -0600
+description: "If this shows up in an email post I fucked up"
 ---
-HO boy do I hope this works correctly....please please please please????????
+You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
 
 Jekyll requires blog post files to be named according to the following format:
 
