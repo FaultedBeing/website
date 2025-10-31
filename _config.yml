@@ -26,6 +26,7 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://maxoberg.dev" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: FaultedBeing
 github_username:  faultedbeing
+timezone: America/Chicago
 
 collections:
   projects:
@@ -33,10 +34,22 @@ collections:
   project_updates: # Our new collection for updates
     output: true # Updates don't need their own pages
 
+# Navigation settings
+header_pages:
+  - about.markdown
+  - posts.md
+  - projects.md
+
 # Build settings
 theme: minima
 plugins:
   - jekyll-feed
+
+defaults:
+  - scope:
+      path: "topics"
+    values:
+      nav_exclude: true
 
 # Exclude from processing.
 # The following items will not be processed, by default.

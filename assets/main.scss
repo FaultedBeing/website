@@ -29,6 +29,14 @@ body {
   color: var(--text-color);
 }
 
+.page-content .wrapper {
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
 h1, h2, h3, h4, h5, h6 {
   color: var(--heading-color);
 }
@@ -79,6 +87,38 @@ hr {
   color: var(--link-hover-color);
 }
 
+.site-header .wrapper {
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.site-header .site-title {
+  float: left;
+}
+
+.site-header .site-nav {
+  float: right;
+}
+
+@media screen and (max-width: 960px) {
+  .site-header .site-title {
+    float: none;
+    display: block;
+    margin-bottom: 0.35em;
+  }
+
+  .site-header .site-nav {
+    float: none;
+    clear: both;
+    margin-top: 0;
+    text-align: right;
+    display: block;
+  }
+}
+
 
 // 3. Your custom component styles, now using the dark mode variables.
 
@@ -121,6 +161,12 @@ hr {
 .project-box h3 {
   margin: 0;
   font-size: 1.1em;
+}
+
+.project-last-updated {
+  margin-top: 0.4em;
+  font-size: 0.85em;
+  color: var(--subtle-text-color);
 }
 
 .project-updates-list {
@@ -200,8 +246,8 @@ code {
 
 .post-preview-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
   margin-top: 1em;
 }
 
@@ -224,9 +270,19 @@ code {
   text-decoration: none;
 }
 
+.post-preview-hero {
+  width: 100%;
+  padding-top: 45%;
+  background-size: cover;
+  background-position: center;
+}
+
 .post-preview-title {
   padding: 15px;
   border-bottom: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35em;
 }
 
 .post-preview-title h3 {
@@ -235,17 +291,32 @@ code {
   font-size: 1.1em;
 }
 
+.post-preview-date {
+  font-size: 0.85em;
+  color: var(--subtle-text-color);
+}
+
 .post-preview-content {
-  padding: 15px;
-  max-height: 100px; /* ADDED: This limits the text height */
-  overflow: hidden; /* ADDED: This is necessary for the fade effect to work on overflowing text */
-  position: relative; /* Required for the fade effect */
+  padding: 14px;
+  max-height: 160px;
+  overflow: hidden;
+  position: relative;
 }
 
 .post-preview-content p {
   color: var(--subtle-text-color);
   font-size: 0.9em;
   margin: 0;
+  line-height: 1.5;
+}
+
+.post-preview-topic {
+  display: inline-block;
+  font-size: 0.8em;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--subtle-text-color);
+  margin-bottom: 0.4em;
 }
 
 /* This creates the fade-out effect */
@@ -255,8 +326,246 @@ code {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 60%; /* Increased height for a smoother fade */
+  height: 40%;
   background: linear-gradient(to bottom, transparent, var(--card-background-color));
+}
+
+
+.site-header .wrapper {
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.site-header .site-title {
+  float: left;
+}
+
+.site-header .site-nav {
+  float: right;
+}
+
+.post-layout .post-header,
+.post-layout .post-body {
+  max-width: 780px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.post-layout .post-body {
+  padding-bottom: 2em;
+}
+
+.project-update-layout .post-header,
+.project-update-layout .project-update-body {
+  max-width: 780px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.project-update-layout .project-update-body {
+  padding-bottom: 2em;
+}
+
+.project-layout .post-header,
+.project-layout .project-main-content {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.posts-page-container {
+  position: relative;
+  padding-left: 320px;
+}
+
+.posts-main-content {
+  max-width: 1200px;
+}
+
+.topics-sidebar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 260px;
+}
+
+.posts-intro {
+  color: var(--subtle-text-color);
+  margin-bottom: 1.5em;
+}
+
+.post-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+  width: 100%;
+}
+
+.post-card {
+  background-color: var(--card-background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  height: 100%;
+}
+
+.post-card-link {
+  color: inherit;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.post-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+}
+
+.post-card-image {
+  width: 100%;
+  padding-top: 56.25%;
+  background-size: cover;
+  background-position: center;
+}
+
+.post-card-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  gap: 12px;
+}
+
+.post-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.85em;
+  color: var(--subtle-text-color);
+}
+
+.post-card-title {
+  margin: 0;
+  font-size: 1.25em;
+}
+
+.post-card-excerpt {
+  margin: 0;
+  color: var(--subtle-text-color);
+  line-height: 1.6;
+}
+
+.post-card-readmore {
+  margin-top: auto;
+  font-weight: 600;
+  font-size: 0.9em;
+  color: var(--link-color);
+}
+
+.topics-card {
+  background-color: var(--card-background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 20px;
+  position: sticky;
+  top: 120px;
+  max-height: calc(100vh - 140px);
+  overflow-y: auto;
+}
+
+.topics-heading {
+  margin-top: 0;
+  margin-bottom: 1em;
+  font-size: 1.1em;
+}
+
+.topics-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6em;
+}
+
+.topics-list a {
+  color: var(--link-color);
+  font-size: 0.95em;
+}
+
+.topics-list a:hover {
+  color: var(--link-hover-color);
+}
+
+.topics-empty {
+  color: var(--subtle-text-color);
+  font-size: 0.9em;
+}
+
+.topics-collapsible {
+  display: none;
+  margin-bottom: 1.5em;
+}
+
+.topics-collapsible details {
+  background-color: var(--card-background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 16px 20px;
+}
+
+.topics-collapsible summary {
+  cursor: pointer;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--heading-color);
+}
+
+.topics-collapsible details[open] summary {
+  margin-bottom: 0.75em;
+}
+
+.topics-collapsible .topics-list {
+  margin-top: 0.5em;
+  gap: 0.5em;
+}
+
+.topic-section {
+  margin-bottom: 2.5em;
+}
+
+.topic-section-heading {
+  margin-bottom: 1em;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.5em;
+}
+
+.post-topic-tag {
+  display: inline-block;
+  font-size: 0.75em;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--link-hover-color);
+  background-color: rgba(64, 160, 204, 0.12);
+  border: 1px solid rgba(64, 160, 204, 0.4);
+  border-radius: 999px;
+  padding: 0.25em 0.75em;
+  margin-left: 0.75em;
+}
+
+.post-list li {
+  position: relative;
+}
+
+.post-list li + li {
+  margin-top: 1.5em;
 }
 
 //
@@ -314,6 +623,24 @@ code {
 
 }
 
+@media screen and (max-width: 1300px) {
+  .topics-sidebar {
+    display: none;
+  }
+
+  .posts-main-content {
+    max-width: none;
+  }
+
+  .topics-collapsible {
+    display: block;
+  }
+
+  .posts-page-container {
+    padding-left: 0;
+  }
+}
+
 //
 // --- Homepage Profile Image ---
 //
@@ -334,6 +661,14 @@ code {
   justify-content: space-between;
   align-items: flex-start;
   gap: 40px; // Creates space between the columns
+}
+
+.site-footer .wrapper {
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 // This overrides the theme's default footer layout to ensure wrapping works
@@ -414,11 +749,14 @@ code {
 // 1. Establish a positioning context for the page.
 .project-page-container {
   position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 // 2. The main content will behave as a normal block.
 .project-main-content {
-  max-width: 800px; // Give the content a max width for readability
+  width: 100%;
 }
 
 // 3. Position the sidebar outside the main content flow on larger screens.

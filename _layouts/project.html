@@ -1,7 +1,7 @@
 ---
 layout: default
 ---
-<article class="post">
+<article class="post project-layout">
 
   <header class="post-header">
     <h1 class="post-title">{{ page.title | escape }}</h1>
@@ -20,15 +20,39 @@ layout: default
 
       <h2>Project Updates</h2>
       <div class="project-updates-list">
-        {% assign sorted_updates = site.project_updates | sort: 'date' | reverse %}
+        {% assign project_updates_all = site.project_updates | where: "project_slug", page.slug %}
+        {% assign sorted_updates = project_updates_all | sort: 'date' | reverse %}
         {% for update in sorted_updates %}
           {% if update.project_slug == page.slug %}
             <a href="{{ update.url | relative_url }}" class="update-card-link">
               <article class="update-item-card">
-                {% assign first_image_part = update.content | split: '](' | last %}
-                {% assign first_image_url = first_image_part | split: ')' | first %}
-                {% if first_image_url contains '://' or first_image_url contains '/' %}
-                  <div class="update-card-image" style="background-image: url('{{ first_image_url | relative_url }}')"></div>
+                {% assign update_image = update.image %}
+                {% if update_image == nil or update_image == '' %}
+                  {% assign img_fragments = update.content | split: '<img' %}
+                  {% if img_fragments.size > 1 %}
+                    {% assign first_img_fragment = img_fragments[1] %}
+                    {% if update_image == nil or update_image == '' %}
+                      {% assign src_fragments = first_img_fragment | split: 'src="' %}
+                      {% if src_fragments.size > 1 %}
+                        {% assign after_src = src_fragments[1] %}
+                        {% assign update_image = after_src | split: '"' | first %}
+                      {% endif %}
+                    {% endif %}
+                    {% if update_image == nil or update_image == '' %}
+                      {% assign src_fragments_single = first_img_fragment | split: "src='" %}
+                      {% if src_fragments_single.size > 1 %}
+                        {% assign after_src_single = src_fragments_single[1] %}
+                        {% assign update_image = after_src_single | split: "'" | first %}
+                      {% endif %}
+                    {% endif %}
+                  {% endif %}
+                {% endif %}
+                {% if update_image %}
+                  {% if update_image contains '://' %}
+                    <div class="update-card-image" style="background-image: url('{{ update_image }}')"></div>
+                  {% else %}
+                    <div class="update-card-image" style="background-image: url('{{ update_image | relative_url }}')"></div>
+                  {% endif %}
                 {% endif %}
                 <div class="update-card-content">
                   <h3 class="update-title">{{ update.title }}</h3>

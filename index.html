@@ -35,22 +35,24 @@ layout: personal
         The 'limit:3' filter makes this efficient and avoids needing 'break'.
       {% endcomment %}
       {% for slug in slugs_in_order limit:3 %}
-  
+
         {% comment %}
           Step 3: Find the one project that matches the current slug.
         {% endcomment %}
         {% for project in site.projects %}
           {% if project.slug == slug %}
-  
+            {% assign latest_update = site.project_updates | where: "project_slug", project.slug | sort: 'date' | last %}
+            {% assign last_updated_date = latest_update.date | default: project.date %}
             <!-- This is the code that displays the project box -->
             <a href="{{ project.url | relative_url }}" class="project-box">
               <div class="project-image" style="background-image: url('{{ project.image | relative_url }}');"></div>
               <div class="project-title">
                 <h3>{{ project.title }}</h3>
+                <p class="project-last-updated">Last updated {{ last_updated_date | date: "%B %d, %Y" }}</p>
               </div>
             </a>
             <!-- End of the project box code -->
-  
+
           {% endif %}
         {% endfor %}
       {% endfor %}
@@ -62,13 +64,22 @@ layout: personal
     <h2>Recent Posts</h2>
   
     <div class="post-preview-grid">
-      {% for post in site.posts limit:3 %}
+      {% assign blog_posts = site.posts %}
+      {% assign promoted_updates = site.project_updates | where: "promote_to_blog", true %}
+      {% assign combined_posts = blog_posts | concat: promoted_updates %}
+      {% assign sorted_posts = combined_posts | sort: "date" | reverse %}
+      {% for post in sorted_posts limit:3 %}
         <a href="{{ post.url | relative_url }}" class="post-preview-box">
+          {% if post.image %}
+            <div class="post-preview-hero" style="background-image: url('{{ post.image | relative_url }}');"></div>
+          {% endif %}
           <div class="post-preview-title">
+            <span class="post-preview-topic">{{ post.topic | default: post.project_slug | default: 'Miscellaneous' }}</span>
             <h3>{{ post.title }}</h3>
+            <span class="post-preview-date">{{ post.date | date: "%B %d, %Y" }}</span>
           </div>
           <div class="post-preview-content">
-            <p>{{ post.excerpt | strip_html }}</p>
+            <p>{{ post.content | strip_html | truncate: 250 }}</p>
           </div>
         </a>
       {% endfor %}

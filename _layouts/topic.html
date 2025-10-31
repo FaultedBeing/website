@@ -1,0 +1,44 @@
+---
+layout: default
+---
+<article class="post">
+  <header class="post-header">
+    <h1 class="post-title">{{ page.title | default: page.topic }}</h1>
+    {% if page.description %}
+      <p class="posts-intro">{{ page.description }}</p>
+    {% endif %}
+  </header>
+
+  <div class="topic-page-content">
+    {% assign topic_name = page.topic %}
+    {% assign blog_posts = site.posts | where: "topic", topic_name %}
+    {% assign promoted_updates = site.project_updates | where: "promote_to_blog", true | where: "topic", topic_name %}
+    {% assign topic_posts = blog_posts | concat: promoted_updates | sort: 'date' | reverse %}
+
+    {% if topic_posts.size > 0 %}
+      <div class="post-card-grid">
+        {% for post in topic_posts %}
+          <article class="post-card">
+            <a class="post-card-link" href="{{ post.url | relative_url }}">
+              {% if post.image %}
+                <div class="post-card-image" style="background-image: url('{{ post.image | relative_url }}');"></div>
+              {% endif %}
+              <div class="post-card-body">
+                <div class="post-card-meta">
+                  <span class="post-card-date">{{ post.date | date: "%B %d, %Y" }}</span>
+                  <span class="post-topic-tag">{{ post.topic | default: 'Miscellaneous' }}</span>
+                </div>
+                <h2 class="post-card-title">{{ post.title | escape }}</h2>
+                <p class="post-card-excerpt">{{ post.excerpt | strip_html | truncate: 200 }}</p>
+                <span class="post-card-readmore">Read more →</span>
+              </div>
+            </a>
+          </article>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="topics-empty">No posts have been published for {{ topic_name }} yet.</p>
+    {% endif %}
+  </div>
+</article>
+

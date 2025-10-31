@@ -4,12 +4,12 @@ layout: null
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>{{ site.title | xml_escape }} - All Project Updates</title>
+    <title>{{ site.title | xml_escape }} - Pintle Injector Updates</title>
     <description>{{ site.description | xml_escape }}</description>
     <link>{{ site.url }}{{ site.baseurl }}/</link>
-    <atom:link href="{{ "/feed-projects.xml" | absolute_url }}" rel="self" type="application/rss+xml" />
-    {% assign sorted_updates = site.project_updates | sort: 'date' | reverse %}
-    {% for update in sorted_updates limit:10 %}
+    <atom:link href="{{ "/feed-pintle.xml" | absolute_url }}" rel="self" type="application/rss+xml" />
+    {% assign updates = site.project_updates | where: "project_slug", "pintle" | sort: 'date' | reverse %}
+    {% for update in updates limit:10 %}
       <item>
         <title>{{ update.title | xml_escape }}</title>
         <description>{{ update.content | xml_escape }}</description>
