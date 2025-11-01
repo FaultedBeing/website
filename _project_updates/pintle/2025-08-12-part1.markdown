@@ -8,78 +8,97 @@ promote_to_blog: true
 topic: Aerospace
 ---
 
-#### an introduction and guidelines
+# So You Want to Design a Pintle Injector
 
-(and way more details on how I designed an injector than you probably ever need, all in the the context of Herald’s development)
+<span style="font-size: 100%;">An Introduction and Background </span>
+
+<span style="font-size: 60%;"> (and way more details on how I designed an injector than you probably ever need, and yet, probably not enough details, all in the the context of a random rocket engine's development) </span>
+
 By Max Oberg
 
+---
 
+<span style="font-size: 120%;">**Warning 1:**</span> This is the work of an amateur, I have done my best to create an accurate write up, but please take everything with a grain of salt. If you see any errors please reach out: max@maxoberg.dev . I will be striving to releases more versions when I find time as I fine tune this and can get other eyes on it.
 
+<span style="font-size: 110%;">**Warning 2:**</span> Units are everywhere. I may be referring to kg in one section, and lbs in the next. I wish it wasn't this way, but I am lazy, and someone decided to ignore the French in the 1800s and now it's out of my hands. (Also, screw you 1950s paper on annular orifice discharge coefficients specifically).
 
+**Note:** Any mention of "Herald" is referencing the original engine this injector was designed for, which was designed and developed by the PARSEC team at Caltech.
 
-
-
-
-**Warning**: This was written in the context of Caltech's PARSEC Rocketry Group's work, and was meant to be an introductuory resource for brand new members who wanted to learn more. I tried to make it as least jargony as possible, and make it (to the degree I could possible) the least worst to read. There will be bad joke attempts scattered through out, and it was written as informally as a mildly composed text message. It also uses old images of hardware designs, and things that I have long since changed, but until I have the time to go back over this, I'm presenting it as is. With that context: enjoy......
-
-The original PDF link can be found here/on my [github][pintlepdf]
-
-
-**Warning 2** : Units are everywhere. I may be referring to kg in one section, and lbs in the next. I wish it
-wasn't this way but someone decided to ignore the French in the 1800s and now it's out of my hands.
-Screw you 1950s paper on annular orifice discharge coefficients specifically. (And for future reference,
-Herald is an engine developed by the Parsec team at Caltech)
-
+---
 
 ## Nomenclature
 
-ṁ = mass flow rate
-⍴ = density
-𝑢 = velocity
-Cd = Discharge Coefficient
-V̇ = volumetric flow rate
-A = area
-ΔP = pressure difference/stiffness
-N = number of central pintle shaft orifices
-d = diameter
-BF = Blockage Factor
+<span style="font-size: 100%;">Now, no paper with formulas should ever, in my opinion, be without this handy table below. I get so annoyed reading papers that assume I inherently understand the variables they picked. I am monkey who barely remembers to brush his teeth at night, If I am trying to learn from your paper, please don't make it harder than it needs to be. </span>
 
-_(1950s paper terms below)_
+| **Variables**                               | ***Subscripts***                                 |
+| ------------------------------------------- | ------------------------------------------------ |
+| $\dot{m}$= Mass Flow Rate                   | exp = Expected                                   |
+| $\rho$ = density                            | ideal = Value Dealing with Ideal Flow            |
+| $u$ = velocity                              | fuel = Value Dealing with Fuel Characteristics   |
+| $C_d$ = Discharge Coefficient               | ox = Value Dealing with Oxidizer Characteristics |
+| V̇ = Volumetric Flow Rate                   | oa = Outer Annular Orifice                       |
+| A = Area                                    |                                                  |
+| $\Delta P$= Pressure Difference/Stiffness   |                                                  |
+| N = Number of Central Pintle Shaft Orifices |                                                  |
+| d = Diameter                                |                                                  |
+| BF = Blockage Factor                        |                                                  |
+| $v$ =                                       |                                                  |
 
-G = mass flow rate through an orifice, ṁ/area
-μ = fluid absolute viscosity
-CC = coefficient of stream contraction in an orifice
-F = fraction of maximum pressure recovery due to
-stream expansion from the vena contracta to full
-annulus area actually recovered in an orifice
-𝑓𝑝 = friction factor for flow between parallel plates of
+This small table below are variables specific to the 1950s paper found in Warning 2 above. Whether this paper us strictly necessary is definitely up for debate, however, I leave it here anyway.
 
-infinite width
-_Z_ = concentric annular length-to-width ratio
-L = orifice thickness/length
+| **1950s Discharge Coefficient Paper Terms Below**                                                                                                                                                                      |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| G = Mass Flow Rate Through an orifice (ṁ/A)                                                                                                                                                                            |
+| μ = Fluid Absolute Viscosity                                                                                                                                                                                           |
+| $C_c$ = Coefficient of Stream Contraction in an Orifice                                                                                                                                                                |
+| F = Fraction of maximum pressure recovery due to stream expansion from the vena contracta to full annulus area actually recovered in an orifice  <span style="font-size: 70%;">(a hell of a mouth full, I know)</span> |
+| $𝑓_𝑝$ = Friction Factor for Flow Between Parallel Plates of Infinite Width                                                                                                                                           |
+| Z = Concentric Annular Length-to-Width Ratio                                                                                                                                                                           |
+| L = Orifice Thickness/Length                                                                                                                                                                                           |
 
-#### Subscripts
+Now, most if not all of the above terms will be described in due time, never fear!
 
-```
-exp = expected
-ideal = value dealing with ideal flow
-fuel = value dealing with fuel characteristics
-ox = value dealing with oxidizer characteristics
-p = dealing with pintle shaft
-oa = outer annular orifice
-```
 ## Introduction
 
-```
-Every rocket engine will typically have a few preset parameters before you approach the design
-of an injector, fuel/oxidizer choice, mixture ratio and mass flow rates of your propellants, and the chamber
-pressure of your engine.
-Before we use these values however, some aspects of fluids need to be discussed. Injectors on a
-fundamental level are plates of metal with holes in them. One of the only questions that needs to be
-asked is how big to make said holes. With a certain set mass flow rate, density, and injection velocity, one
-can calculate an ideal area for which the hole (or orifice) should be ideally sized. This can be seen below.
-```
+            Every rocket engine will typically have a few preset parameters before you approach the design of an injector. Among these are: 
 
-I have not finished converting this to a markdown format and will return to finish this.
+- Fuel and Oxidizer choice
+
+- Mixture Ratio
+
+- Mass Flow Rates of Propellants
+
+- Chamber Pressure of the Rocket Engine
+
+Before we use these values however, some aspects of fluids needs to be discussed.
+
+            Injectors on a fundamental level are plates of metal with holes in them. Your shower head? An injector. Your sink faucet? An injector. Your sunscreen bottle? Yes, also an injector. So the basic question you must ask first when approaching the design of the injector, is how big should the holes in question be?
+
+            With a certain set mass flow rate, density, and injection velocity, one can begin to calculate an ideal area for which the holes (or orifices) should be ideally size. This equation can be seen below:
+
+$$Area = \frac{\dot{m}}{\rho \cdot u} \tag{1}$$
+
+            Now, there are some broad assumptions you are making to use the above equation (This equation is a conservation of mass equation, with the assumption that there is Steady, Uniform, and Incompressible flow). *However*, when fluid flows though an orifice, the effects of boundary conditions around the flow (the "walls" and edges of the hole/orifice), as well as entry/exit conditions  (feed pressure, exit pressure, whether the hole is a sharp edge or rounded) cause the ideal mass flow rate ($\dot{m}$) above to not accurately reflect reality. This results in a lower mass flow rate through the orifice than originally calculated. We call the ratio between the ideal flow and the actual flow the **Discharge Coefficient**.
+
+$$C_d = \frac{Q_{\text{exp}}}{Q_{\text{ideal}}} \tag{2}$$
+
+            The discharge coefficient is the ratio of the expected flow over ideal flow. For circular orifices, the simplified equation below is sufficient to represent the discharge coefficient. 
+
+$$C_d = \frac{\dot{m}}{\rho \dot{V}} = \frac{\dot{m}}{\rho A u} = \frac{\dot{m}}{\rho A \sqrt{\frac{2 \Delta P}{\rho}}} = \frac{\dot{m}}{A \sqrt{2 \rho \Delta P}} \tag{3}$$
+
+> <span style="font-size: 70%;">The [Wikipedia page](https://en.wikipedia.org/wiki/Discharge_coefficient) for the equation above</span>
+
+            A few assumptions must now be made to make forward progress using equation 3. In order to find A (the orifice area), and assumption for $C_d$ and an ideal $\Delta P$ value must be used. A $C_d$ for a circular orifice here can be assumed to be around .61 to start (an estimate based on previous experimental experience). The $\Delta P$ however, is more complex.
+
+            $\Delta P$ is more typically called the **Stiffness** when dealing with injectors. The stiffness is the difference in pressure across the injector. More specifically, it is the difference between the combustion chamber pressure and the pressure in the main manifold* on the injector (on the other side of the injection orifice). 
+
+> <span style="font-size: 90%;">*a manifold in this sense is a volume for fluid to fill and exists for (2?) main reasons. The first is to remove fluid flow affects from the small channels feeding into the injector. so instead of dealing with 48 separate flows, you can treat the fluid being injected into the rocket engine as if its coming from, in essence, a reservoir or tank. The second is to better circulate fluid across the back of the injector face in order to cool it.</span>
+
+            Typically this value is around 20% for early rocket injectors, before they can be dialed into a lower % with testing.  One of the primary reasons you want your injector to have a certain level of stiffness is to avoid any backflow. This occurs when the propellant flow reverses across the injector, and propellant stops being injected to be combusted. Combustion gasses potentially turning your injector manifold into a new combustion chamber is, to say the least, not great!
+
+            Additionally, if the stiffness is sufficiently low, a pressure wave could momentarily reverse the flow in the injector orifices. This causes an interruption to any propellant injection, and a momentary interruption to the combustion. This is a phenomenon known as **Chugging**. This typically will result in an oscillation in the chamber gases, that can severely affect your performance/controllability, and worse case scenario: destroy your engine. Further complications to stiffness in an engine arise when you throttle the engine.
+
+            When an engine is deigned to throttle, the mass flow rate is the variable that we are changing.
+
 
 [pintlepdf]: https://maxoberg.dev/assets/files/So you want to design a pintle injector.pdf
