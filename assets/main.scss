@@ -376,6 +376,54 @@ code {
   margin-right: auto;
 }
 
+.post-layout table,
+.project-update-layout table,
+.project-layout table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5em 0;
+  background-color: transparent;
+  color: var(--text-color);
+}
+
+.post-layout table th,
+.project-update-layout table th,
+.project-layout table th {
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.95em;
+  padding: 0.75em 0.85em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--heading-color);
+  background-color: rgba(36, 36, 36, 0.9);
+}
+
+.post-layout table td,
+.project-update-layout table td,
+.project-layout table td {
+  padding: 0.75em 0.85em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background-color: rgba(36, 36, 36, 0.9);
+}
+
+.post-layout table tr,
+.project-update-layout table tr,
+.project-layout table tr {
+  background-color: rgba(36, 36, 36, 0.9);
+}
+
+.post-layout table tr:nth-child(even),
+.project-update-layout table tr:nth-child(even),
+.project-layout table tr:nth-child(even) {
+  background-color: rgba(36, 36, 36, 0.9) !important;
+}
+
+.post-layout table tr:last-child td,
+.project-update-layout table tr:last-child td,
+.project-layout table tr:last-child td {
+  border-bottom: none;
+}
+
 .posts-page-container {
   position: relative;
   padding-left: 320px;
