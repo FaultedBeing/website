@@ -38,7 +38,48 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
+  color: #f0a44c;
+}
+
+h1 {
+  font-size: 2.4em;
+  margin-top: 1.2em;
+  margin-bottom: 0.4em;
   color: var(--heading-color);
+}
+
+h2 {
+  font-size: 1.9em;
+  margin-top: 1.4em;
+  margin-bottom: 0.5em;
+}
+
+h3 {
+  font-size: 1.5em;
+  margin-top: 1.2em;
+  margin-bottom: 0.4em;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+h4 {
+  font-size: 1.2em;
+  margin-top: 1.1em;
+  margin-bottom: 0.35em;
+}
+
+h5 {
+  font-size: 1.1em;
+  margin-top: 1em;
+  margin-bottom: 0.3em;
+}
+
+h6 {
+  font-size: 1.05em;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 0.9em;
+  margin-bottom: 0.25em;
 }
 
 // Specifically target the site title in the header to ensure it overrides the theme.
@@ -287,7 +328,7 @@ code {
 
 .post-preview-title h3 {
   margin: 0;
-  color: var(--heading-color);
+  color: #f0a44c;
   font-size: 1.1em;
 }
 
@@ -374,6 +415,27 @@ code {
   max-width: 900px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.post-layout blockquote,
+.project-update-layout blockquote,
+.project-layout blockquote {
+  border-left: 4px solid #ff9f43;
+  padding-left: 1.1em;
+  margin-left: 0;
+  color: var(--text-color);
+  background-color: rgba(36, 36, 36, 0.5);
+}
+
+.figure-center {
+  display: flex;
+  justify-content: center;
+  margin: 1.5em 0;
+}
+
+.figure-center img {
+  max-width: 100%;
+  height: auto;
 }
 
 .post-layout table,

@@ -7,7 +7,8 @@ permalink: /blog/
 {% assign blog_posts = site.posts %}
 {% assign promoted_updates = site.project_updates | where: "promote_to_blog", true %}
 {% assign combined_posts = blog_posts | concat: promoted_updates %}
-{% assign posts_by_topic = combined_posts | group_by_exp: "post", "post.topic | default: post.project_slug | default: 'Miscellaneous'" %}
+{% assign sorted_combined_posts = combined_posts | sort: 'date' | reverse %}
+{% assign posts_by_topic = sorted_combined_posts | group_by_exp: "post", "post.topic | default: post.project_slug | default: 'Miscellaneous'" %}
 {% assign posts_by_topic = posts_by_topic | sort: 'name' %}
 
 {% capture topics_body %}
@@ -37,9 +38,9 @@ permalink: /blog/
     <p class="posts-intro">A collection of articles and thoughts.</p>
     <hr>
 
-    {% if combined_posts.size > 0 %}
+    {% if sorted_combined_posts.size > 0 %}
       <div class="post-card-grid">
-        {% for post in combined_posts %}
+        {% for post in sorted_combined_posts %}
           <article class="post-card">
             <a class="post-card-link" href="{{ post.url | relative_url }}">
               {% if post.image %}
