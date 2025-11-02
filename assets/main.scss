@@ -21,6 +21,8 @@
   --subtle-text-color: #9e9e9e;
   --hr-color: #333333;
   --title-color:  #ebf3ff;
+  --header-text-color: #f0a44c;
+  --header-text-hover-color: #ffbc6a;
 }
 
 // 2. Apply the variables to the site's main elements.
@@ -84,7 +86,7 @@ h6 {
 
 // Specifically target the site title in the header to ensure it overrides the theme.
 .site-header .site-title {
-  color: var(--title-color);
+  color: var(--header-text-color);
 }
 
 a {
@@ -92,13 +94,14 @@ a {
   text-decoration: none;
 }
 
-a:hover, .site-header .site-title:hover {
-  color: var(--title-color);
+a:hover {
+  color: var(--link-hover-color);
   text-decoration: underline;
 }
 
-a:hover {
-  color: var(--link-hover-color);
+.site-header .site-title:hover {
+  color: var(--header-text-hover-color);
+  text-decoration: underline;
 }
 
 hr {
