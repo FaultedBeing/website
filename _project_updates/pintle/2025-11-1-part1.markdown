@@ -88,7 +88,7 @@ $$C_d = \frac{Q_{\text{exp}}}{Q_{\text{ideal}}} \tag{2}$$
 
 $$C_d = \frac{\dot{m}}{\rho \dot{V}} = \frac{\dot{m}}{\rho A u} = \frac{\dot{m}}{\rho A \sqrt{\frac{2 \Delta P}{\rho}}} = \frac{\dot{m}}{A \sqrt{2 \rho \Delta P}} \tag{3}$$
 
-> <span style="font-size: 70%;"> The [Wikipedia page]([Discharge coefficient - Wikipedia](https://en.wikipedia.org/wiki/Discharge_coefficient)) for the equation above</span>
+> <span style="font-size: 70%;"> The [Wikipedia page](https://en.wikipedia.org/wiki/Discharge_coefficient) for the equation above</span>
 
             A few assumptions must now be made to make forward progress using equation 3. In order to find A (the orifice area), and assumption for $C_d$ and an ideal $\Delta P$ value must be used. A $C_d$ for a circular orifice here can be assumed to be around .61 to start (an estimate based on previous experimental experience). The $\Delta P$ however, is more complex.
 
