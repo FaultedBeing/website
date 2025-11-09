@@ -18,9 +18,7 @@ By Max Oberg
 
 ---
 
-<span style="font-size: 120%;">**Warning 1:**</span> This is the work of an amateur, I have done my best to create an accurate write up, but please take everything with a grain of salt. If you see any errors please reach out: max@maxoberg.dev . I will be striving to releases more versions when I find time as I fine tune this and can get other eyes on it.
-
-<span style="font-size: 110%;">**Warning 2:**</span> Units are everywhere. I may be referring to kg in one section, and lbs in the next. I wish it wasn't this way, but I am lazy, and someone decided to ignore the French in the 1800s and now it's out of my hands. (Also, screw you 1950s paper on annular orifice discharge coefficients specifically).
+<span style="font-size: 110%;">**Warning:**</span> Units are everywhere at times. I may be referring to kg in one section, and lbs in the next. I wish it wasn't this way, but I am slightly lazy, and someone decided to ignore the French in the 1800s and now it's out of my hands. (Also, screw you 1950s paper on annular orifice discharge coefficients specifically).
 
 **Note:** Any mention of "Herald" is referencing the original engine this injector was designed for, which was designed and developed by the PARSEC team at Caltech.
 
@@ -351,6 +349,9 @@ Finally we arrive at the igniter and the decisions made around it. We decided to
 
 {: .indent}
 The design challenge began when figuring out where to place the igniter. With a chamber diameter of around 3 inches, there is not much space available in the injector face. While we could have put it in the engine wall, we did not want to cause irregular cooling channel behavior in the side wall and figured the fuel manifold in the injector would better adapt to an igniter interrupting its flow. A quick contour was generated using RPA as a guideline for the igniter chamber. The igniter will function by two quarter inch feed lines of lox and Jet-A, with a port for a spark plug to ignite the propellants. Exact testing will inform us of the usability of our current design.
+
+<span style="font-size: 120%;">**Post Warning:**</span> Now that you've read it all....This is the work of an amateur, I have done my best to create an accurate write up, but please take everything with a grain of salt. If you see any errors please reach out: max@maxoberg.dev . I will be striving to releases more versions when I find time as I fine tune this and can get other eyes on it.
+
 
 ### Sources
 

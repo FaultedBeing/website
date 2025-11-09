@@ -533,7 +533,8 @@ code {
 
 .post-card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 420px));
+  justify-content: left;
   gap: 30px;
   width: 100%;
 }
@@ -545,6 +546,8 @@ code {
   overflow: hidden;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   height: 100%;
+  width: 100%;
+  max-width: 420px;
 }
 
 .post-card-link {
