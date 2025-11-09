@@ -293,7 +293,8 @@ code {
 
 .post-preview-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 560px));
+  justify-content: left;
   gap: 16px;
   margin-top: 1em;
 }
@@ -309,6 +310,8 @@ code {
   color: inherit;
   overflow: hidden;
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  width: 100%;
+  max-width: 560px;
 }
 
 .post-preview-box:hover {
