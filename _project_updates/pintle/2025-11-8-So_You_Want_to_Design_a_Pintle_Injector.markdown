@@ -40,7 +40,6 @@ By Max Oberg
 | N = Number of Central Pintle Shaft Orifices |                                                  |
 | d = Diameter                                |                                                  |
 | BF = Blockage Factor                        |                                                  |
-| $v$ =                                       |                                                  |
 
 This small table below are variables specific to the 1950s paper found in the above Warning above. Whether this paper is strictly necessary is definitely up for debate, however, I leave it here anyway.
 
@@ -102,7 +101,7 @@ A few assumptions must now be made to make forward progress using equation 3. In
 {: .indent}
 $\Delta P$ is more typically called the **Stiffness** when dealing with injectors. The stiffness is the difference in pressure across the injector. More specifically, it is the difference between the combustion chamber pressure and the pressure in the main manifold* on the injector (on the other side of the injection orifice). 
 
-> <span style="font-size: 90%;">*a manifold in this sense is a volume for fluid to fill and exists for (2?) main reasons. The first is to remove fluid flow affects from the small channels feeding into the injector. so instead of dealing with 48 separate flows, you can treat the fluid being injected into the rocket engine as if its coming from, in essence, a reservoir or tank. The second is to better circulate fluid across the back of the injector face in order to cool it.</span>
+> <span style="font-size: 90%;">*a manifold in this sense is a volume for fluid to fill and exists for 2 main reasons. The first is to remove fluid flow affects from the small channels feeding into the injector. So instead of dealing with 48 separate flows, you can treat the fluid being injected into the rocket engine as if its coming from, in essence, a reservoir or tank. The second is to better flow fluid across the back of the injector face in order to cool it.</span>
 
 {: .indent}
 Typically this value is around 20% for early rocket injectors, before they can be dialed into a lower % with testing.  One of the primary reasons you want your injector to have a certain level of stiffness is to avoid any backflow. This occurs when the propellant flow reverses across the injector, and propellant stops being injected to be combusted. Combustion gasses potentially turning your injector manifold into a new combustion chamber is, to say the least, not great!
@@ -218,7 +217,7 @@ When it comes to the number of holes made in the pintle shaft, a rough estimate 
 The ratio of the diameter of the chamber to the diameter of the pintle is shown as the **diameter ratio**. This ratio is typically around 3-5 (also also sourced from the Penn State study<sup id="ref-4"><a href="#source-4">4</a></sup>). 
 
 {: .indent}
-Finally, the **skip ratio** is the length from the injector face to the perpendicular injection point (the lox injection holes in Herald's design) over the diameter of the pintle shaft. This essentially dictates how far into the chamber the pintle shaft reaches. This value should also be around 1. (And by goly wouldn't ya know it, its from the same....damn....source<sup id="ref-4"><a href="#source-4">4</a></sup>)
+Finally, the **skip ratio** is the length from the injector face to the perpendicular injection point (the lox injection holes in Herald's design) over the diameter of the pintle shaft. This essentially dictates how far into the chamber the pintle shaft reaches. This value should also be around 1. (And by golly wouldn't ya know it, its from the same....damn....source<sup id="ref-4"><a href="#source-4">4</a></sup>)
 
 > There are multiple other papers that are helpful and good material for reading more about pintle designs which I will cite here and link in the sources section below.<sup id="ref-7"><a href="#source-7">7</a></sup> - <sup id="ref-8"><a href="#source-8">8</a></sup> - <sup id="ref-9"><a href="#source-9">9</a></sup> - <sup id="ref-10"><a href="#source-10">10</a></sup> - <sup id="ref-11"><a href="#source-11">11</a></sup>   
 
@@ -352,7 +351,6 @@ Finally we arrive at the igniter and the decisions made around it. We decided to
 The design challenge began when figuring out where to place the igniter. With a chamber diameter of around 3 inches, there is not much space available in the injector face. While we could have put it in the engine wall, we did not want to cause irregular cooling channel behavior in the side wall and figured the fuel manifold in the injector would better adapt to an igniter interrupting its flow. A quick contour was generated using RPA as a guideline for the igniter chamber. The igniter will function by two quarter inch feed lines of lox and Jet-A, with a port for a spark plug to ignite the propellants. Exact testing will inform us of the usability of our current design.
 
 <span style="font-size: 120%;">**Post Warning:**</span> Now that you've read it all....This is the work of an amateur, I have done my best to create an accurate write up, but please take everything with a grain of salt. If you see any errors please reach out: max@maxoberg.dev . I will be striving to releases more versions when I find time as I fine tune this and can get other eyes on it.
-
 
 ### Sources
 
