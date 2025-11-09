@@ -230,7 +230,7 @@ The dynamics of the pintle injectors cause the circulation zones indicated in fi
 </figure>
 
 {: .indent}
-Now, I bring this up for two reasons, the circulation zones indicated above could add to the pintle's stability mentioned earlier in this article. It could also create complex thermal loads in the pintle tip. There have been some studies done on trying to better cool the pintle tip. Some designs to increase cooling add extra structure on the internal tup to create better circulation as seen in Figure 4.
+Now, I bring this up for two reasons, the circulation zones indicated above could add to the pintle's stability mentioned earlier in this article. It could also create complex thermal loads in the pintle tip. There have been some studies done on trying to better cool the pintle tip. Some designs to increase cooling add extra structure on the internal tip to create better circulation as seen in Figure 4.
 
 <figure class="figure-center">
   <img src="{{ '/assets/images/pintle_tip_cooling_ex.png' | relative_url }}" alt="Pintle Tip Cooling example" width="524">
