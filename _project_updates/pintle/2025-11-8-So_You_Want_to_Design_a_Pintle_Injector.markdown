@@ -42,7 +42,7 @@ By Max Oberg
 | BF = Blockage Factor                        |                                                  |
 | $v$ =                                       |                                                  |
 
-This small table below are variables specific to the 1950s paper found in Warning 2 above. Whether this paper us strictly necessary is definitely up for debate, however, I leave it here anyway.
+This small table below are variables specific to the 1950s paper found in the above Warning above. Whether this paper is strictly necessary is definitely up for debate, however, I leave it here anyway.
 
 | **1950s Discharge Coefficient Paper Terms Below**                                                                                                                                                                      |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -73,6 +73,7 @@ Every rocket engine will typically have a few preset parameters before you appro
 
 - Chamber Pressure of the Rocket Engine
 
+{: .indent}
 Before we use these values however, some aspects of fluids needs to be discussed.
 
 {: .indent}
@@ -316,12 +317,12 @@ It is expressed in the paper that where $F=0$ for $Z<1.15$, and $F = 1 - e^{-.95
 
 <figure class="figure-center">
   <img src="{{ '/assets/images/1950sfigure5.png' | relative_url }}" alt="1950s Coefficient graph" width="524">
-  <figcaption> Figure 6: 1950s Coefficient graph for $C_C$.<sup id="ref-6"><a href="#source-6">6</a></sup></figcaption>
+  <figcaption> Figure 5: 1950s Coefficient graph for $C_C$.<sup id="ref-6"><a href="#source-6">6</a></sup></figcaption>
 </figure>
 
 <figure class="figure-center">
   <img src="{{ '/assets/images/1950sfigure10.png' | relative_url }}" alt="Pintle Tip Cooling example" width="524">
-  <figcaption> Figure 7: And 1950S Coefficient graph for $f_p$.<sup id="ref-6"><a href="#source-6">6</a></sup></figcaption>
+  <figcaption> Figure 6: And 1950S Coefficient graph for $f_p$.<sup id="ref-6"><a href="#source-6">6</a></sup></figcaption>
 </figure>
 
 {: .indent}
@@ -332,7 +333,7 @@ The function I created to size the annulus orifice first calculates the $c_d$ va
 
 <figure class="figure-center">
   <img src="{{ '/assets/images/matlab_graph.png' | relative_url }}" alt="Matlab Graph" width="524">
-  <figcaption> Figure 8: Matlab Annular Orifice Sizing iterations</figcaption>
+  <figcaption> Figure 7: Matlab Annular Orifice Sizing iterations</figcaption>
 </figure>
 
 {: .indent}
