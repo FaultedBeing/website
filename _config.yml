@@ -44,6 +44,7 @@ header_pages:
 theme: minima
 plugins:
   - jekyll-feed
+  - jekyll-sitemap
 
 defaults:
   - scope:

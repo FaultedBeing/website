@@ -96,7 +96,7 @@ $$C_d = \frac{\dot{m}}{\rho \dot{V}} = \frac{\dot{m}}{\rho A u} = \frac{\dot{m}}
 > <span style="font-size: 70%;"> The [Wikipedia page](https://en.wikipedia.org/wiki/Discharge_coefficient) for the equation above</span>
 
 {: .indent}
-A few assumptions must now be made to make forward progress using equation 3. In order to find A (the orifice area), and assumption for $C_d$ and an ideal $\Delta P$ value must be used. A $C_d$ for a circular orifice here can be assumed to be around .61 to start (an estimate based on previous experimental experience). The $\Delta P$ however, is more complex.
+A few assumptions must now be made to make forward progress using equation 3. In order to find A (the orifice area), an assumption for $C_d$ and an ideal $\Delta P$ value must be used. A $C_d$ for a circular orifice here can be assumed to be around .61 to start (an estimate based on previous experimental experience). The $\Delta P$ however, is more complex.
 
 {: .indent}
 $\Delta P$ is more typically called the **Stiffness** when dealing with injectors. The stiffness is the difference in pressure across the injector. More specifically, it is the difference between the combustion chamber pressure and the pressure in the main manifold* on the injector (on the other side of the injection orifice). 
