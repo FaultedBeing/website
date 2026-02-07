@@ -15,11 +15,228 @@ layout: page
     line-height: 1;
     letter-spacing: -1px;
   }
+  .container > * {
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+  }
 </style>
 
 <div class="container">
   <h1>404</h1>
 
   <p><strong>Page not found :(</strong></p>
-  <p>The requested page could not be found.</p>
+  <p>The requested page is lost in space.</p>
+  <p style="font-size: 0.8em; color: #888;">(Click anywhere to spawn more debris, or grab the text to throw it!)</p>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const container = document.querySelector('.container');
+    // Select the elements we want to float
+    const originalElements = Array.from(container.children);
+    
+    const bodies = [];
+    
+    function createBody(element, x, y, vx, vy) {
+      // If it's a new element (spawned), append it to body
+      if (!element.parentNode) {
+        document.body.appendChild(element);
+        // Fix position immediately to ensure correct width calculation (avoids full-width stretch)
+        element.style.position = 'fixed';
+      }
+      
+      // Lock dimensions before making it fixed
+      if (!element.style.width && element.style.position !== 'fixed') {
+         element.style.width = element.offsetWidth + 'px';
+      }
+
+      element.style.position = 'fixed';
+      element.style.left = x + 'px';
+      element.style.top = y + 'px';
+      element.style.zIndex = 1000;
+      element.style.userSelect = 'none'; // Prevent text highlighting while dragging
+      element.style.cursor = 'grab';
+      
+      // Random color for spawned particles
+      if (element.classList.contains('particle')) {
+         element.style.color = `hsl(${Math.random() * 360}, 70%, 50%)`;
+      }
+
+      const body = {
+        el: element,
+        x: x,
+        y: y,
+        vx: vx,
+        vy: vy,
+        width: element.offsetWidth,
+        height: element.offsetHeight,
+        isDragging: false,
+        lastMouseX: 0,
+        lastMouseY: 0
+      };
+      
+      element.addEventListener('mousedown', (e) => {
+        e.preventDefault(); // Prevent default browser drag/select behavior
+        body.isDragging = true;
+        body.lastMouseX = e.clientX;
+        body.lastMouseY = e.clientY;
+        element.style.cursor = 'grabbing';
+        e.stopPropagation(); // Prevent spawning when clicking an element
+      });
+      
+      bodies.push(body);
+    }
+
+    // Capture initial positions before modifying DOM (which causes reflow)
+    const initialPositions = originalElements.map(el => {
+      const rect = el.getBoundingClientRect();
+      return { el, left: rect.left, top: rect.top };
+    });
+
+    // Initialize existing elements
+    initialPositions.forEach(pos => {
+      // Start with zero velocity
+      createBody(pos.el, pos.left, pos.top, 0, 0);
+    });
+
+    // Drift apart after 2 seconds
+    setTimeout(() => {
+      bodies.forEach(b => {
+        // Add a random drift velocity
+        b.vx += (Math.random() - 0.5) * 4;
+        b.vy += (Math.random() - 0.5) * 4;
+      });
+    }, 2000);
+
+    // Global mouse up
+    function stopDragging() {
+      bodies.forEach(b => {
+        if (b.isDragging) {
+          b.isDragging = false;
+          b.el.style.cursor = 'grab';
+        }
+      });
+    }
+    window.addEventListener('mouseup', stopDragging);
+    window.addEventListener('mouseleave', stopDragging);
+
+    // Global mouse move
+    window.addEventListener('mousemove', (e) => {
+      bodies.forEach(b => {
+        if (b.isDragging) {
+          const dx = e.clientX - b.lastMouseX;
+          const dy = e.clientY - b.lastMouseY;
+          b.x += dx;
+          b.y += dy;
+          b.vx = dx; // Throwing physics
+          b.vy = dy;
+          b.lastMouseX = e.clientX;
+          b.lastMouseY = e.clientY;
+        }
+      });
+    });
+    
+    // Spawn on click
+    document.addEventListener('click', (e) => {
+        const span = document.createElement('span');
+        span.textContent = '404';
+        span.className = 'particle';
+        span.style.fontSize = (Math.random() * 20 + 10) + 'px';
+        span.style.fontWeight = 'bold';
+        span.style.fontFamily = 'monospace';
+        
+        // Spawn randomly on screen
+        const randomX = Math.random() * (window.innerWidth - 50);
+        const randomY = Math.random() * (window.innerHeight - 50);
+        
+        createBody(span, randomX, randomY, (Math.random() - 0.5) * 10, (Math.random() - 0.5) * 10);
+    });
+
+    function update() {
+      // Check for collisions between bodies
+      for (let i = 0; i < bodies.length; i++) {
+        for (let j = i + 1; j < bodies.length; j++) {
+          const b1 = bodies[i];
+          const b2 = bodies[j];
+          
+          // Skip if both are dragging (unlikely but safe)
+          if (b1.isDragging && b2.isDragging) continue;
+
+          // AABB Overlap Check
+          if (b1.x < b2.x + b2.width &&
+              b1.x + b1.width > b2.x &&
+              b1.y < b2.y + b2.height &&
+              b1.y + b1.height > b2.y) {
+            
+            // Calculate centers and overlaps
+            const c1x = b1.x + b1.width / 2;
+            const c1y = b1.y + b1.height / 2;
+            const c2x = b2.x + b2.width / 2;
+            const c2y = b2.y + b2.height / 2;
+            
+            const ox = (b1.width + b2.width) / 2 - Math.abs(c1x - c2x);
+            const oy = (b1.height + b2.height) / 2 - Math.abs(c1y - c2y);
+            
+            // Resolve on the axis of least penetration
+            if (ox < oy) {
+              const dir = c1x > c2x ? 1 : -1;
+              
+              if (b1.isDragging) {
+                b2.x -= ox * dir;
+                b2.vx = b1.vx * 0.8;
+              } else if (b2.isDragging) {
+                b1.x += ox * dir;
+                b1.vx = b2.vx * 0.8;
+              } else {
+                const push = ox / 2;
+                b1.x += push * dir; b2.x -= push * dir;
+                const temp = b1.vx; b1.vx = b2.vx; b2.vx = temp; // Swap X velocity
+              }
+            } else {
+              const dir = c1y > c2y ? 1 : -1;
+              
+              if (b1.isDragging) {
+                b2.y -= oy * dir;
+                b2.vy = b1.vy * 0.8;
+              } else if (b2.isDragging) {
+                b1.y += oy * dir;
+                b1.vy = b2.vy * 0.8;
+              } else {
+                const push = oy / 2;
+                b1.y += push * dir; b2.y -= push * dir;
+                const temp = b1.vy; b1.vy = b2.vy; b2.vy = temp; // Swap Y velocity
+              }
+            }
+          }
+        }
+      }
+
+      bodies.forEach(b => {
+        if (!b.isDragging) {
+          // Apply drag to slow down to a "slow pace"
+          const speed = Math.sqrt(b.vx * b.vx + b.vy * b.vy);
+          if (speed > 0.5) {
+             b.vx *= 0.984;
+             b.vy *= 0.984;
+          }
+
+          b.x += b.vx;
+          b.y += b.vy;
+          
+          // Bounce off walls
+          if (b.x <= 0) { b.x = 0; b.vx *= -1; }
+          if (b.x + b.width >= window.innerWidth) { b.x = window.innerWidth - b.width; b.vx *= -1; }
+          if (b.y <= 0) { b.y = 0; b.vy *= -1; }
+          if (b.y + b.height >= window.innerHeight) { b.y = window.innerHeight - b.height; b.vy *= -1; }
+        }
+        
+        b.el.style.left = b.x + 'px';
+        b.el.style.top = b.y + 'px';
+      });
+      requestAnimationFrame(update);
+    }
+    
+    update();
+  });
+</script>
