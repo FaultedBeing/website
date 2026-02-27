@@ -6,82 +6,94 @@ layout: personal
 
 <style>
   .wrapper {
-    max-width: none !important; /* Removes the theme's width limit */
-    margin-left: 0 !important;   /* Aligns the container to the left */
-    
+    max-width: none !important;
+    /* Removes the theme's width limit */
+    margin-left: 0 !important;
+    /* Aligns the container to the left */
+
     /* We add padding so the text doesn't hit the screen edge */
-    padding-left: 30px !important; 
+    padding-left: 30px !important;
     padding-right: 30px !important;
   }
 </style>
 
 <div class="custom-home">
   <h1>This Corner of the Web</h1>
-  <p>A collection of my projects, thoughts, and resources. This website is still a little rough around the edges. Most functions should work however (including email notifications).</p>
+  <p>A collection of my projects, thoughts, and resources. This website is still a little rough around the edges. Most
+    functions should work however (including email notifications).</p>
 
-  <img src="{{ '/assets/images/me.jpeg' | relative_url }}" alt="A photo of me" class="home-profile-image">  <hr>
+  <img src="{{ '/assets/images/me.jpeg' | relative_url }}" alt="A photo of me" class="home-profile-image">
+  <hr>
 
   <section class="link-group">
     <h2>Recent Projects</h2>
-  
+
     <div class="project-grid">
       {% comment %}
-        Step 1: Get the project slugs, sorted by most recent update.
+      Step 1: Get all unique project slugs from both projects and updates.
       {% endcomment %}
-      {% assign slugs_in_order = site.project_updates | sort: 'date' | reverse | map: 'project_slug' | uniq %}
-  
+      {% assign all_slugs = site.projects | map: 'slug' %}
+
       {% comment %}
-        Step 2: Loop through only the first 3 slugs from our ordered list.
-        The 'limit:3' filter makes this efficient and avoids needing 'break'.
+      Step 2: Create a list of [date, slug] pairs to sort by activity.
       {% endcomment %}
-      {% for slug in slugs_in_order limit:3 %}
+      {% assign project_activity = "" | split: "" %}
+      {% for slug in all_slugs %}
+      {% assign project = site.projects | where: "slug", slug | first %}
+      {% assign latest_update = site.project_updates | where: "project_slug", slug | sort: 'date' | last %}
+      {% assign activity_date = latest_update.date | default: project.date %}
+      {% assign entry = activity_date | date: "%Y-%m-%d" | append: "|" | append: slug %}
+      {% assign project_activity = project_activity | push: entry %}
+      {% endfor %}
 
-        {% comment %}
-          Step 3: Find the one project that matches the current slug.
-        {% endcomment %}
-        {% for project in site.projects %}
-          {% if project.slug == slug %}
-            {% assign latest_update = site.project_updates | where: "project_slug", project.slug | sort: 'date' | last %}
-            {% assign last_updated_date = latest_update.date | default: project.date %}
-            <!-- This is the code that displays the project box -->
-            <a href="{{ project.url | relative_url }}" class="project-box">
-              <div class="project-image" style="background-image: url('{{ project.image | relative_url }}');"></div>
-              <div class="project-title">
-                <h3>{{ project.title }}</h3>
-                <p class="project-last-updated">Last updated {{ last_updated_date | date: "%B %d, %Y" }}</p>
-              </div>
-            </a>
-            <!-- End of the project box code -->
+      {% comment %}
+      Step 3: Sort by date descending and take the top 3.
+      {% endcomment %}
+      {% assign sorted_activity = project_activity | sort | reverse %}
 
-          {% endif %}
-        {% endfor %}
+      {% for entry in sorted_activity limit:3 %}
+      {% assign entry_parts = entry | split: "|" %}
+      {% assign active_slug = entry_parts[1] %}
+      {% assign project = site.projects | where: "slug", active_slug | first %}
+
+      {% assign latest_update = site.project_updates | where: "project_slug", project.slug | sort: 'date' | last %}
+      {% assign last_updated_date = latest_update.date | default: project.date %}
+
+      <a href="{{ project.url | relative_url }}" class="project-box">
+        <div class="project-image" style="background-image: url('{{ project.image | relative_url }}');"></div>
+        <div class="project-title">
+          <h3>{{ project.title }}</h3>
+          <p class="project-last-updated">Last updated {{ last_updated_date | date: "%B %d, %Y" }}</p>
+        </div>
+      </a>
       {% endfor %}
     </div>
     <p style="margin-top: 1em;"><a href="/projects/">View all projects...</a></p>
   </section>
-  
+
   <section class="link-group">
     <h2>Recent Posts</h2>
-  
+
     <div class="post-preview-grid">
       {% assign blog_posts = site.posts %}
       {% assign promoted_updates = site.project_updates | where: "promote_to_blog", true %}
       {% assign combined_posts = blog_posts | concat: promoted_updates %}
       {% assign sorted_posts = combined_posts | sort: "date" | reverse %}
       {% for post in sorted_posts limit:3 %}
-        <a href="{{ post.url | relative_url }}" class="post-preview-box">
-          {% if post.image %}
-            <div class="post-preview-hero" style="background-image: url('{{ post.image | relative_url }}');"></div>
-          {% endif %}
-          <div class="post-preview-title">
-            <span class="post-preview-topic">{{ post.topic | default: post.project_slug | default: 'Miscellaneous' }}</span>
-            <h3>{{ post.title }}</h3>
-            <span class="post-preview-date">{{ post.date | date: "%B %d, %Y" }}</span>
-          </div>
-          <div class="post-preview-content">
-            <p>{{ post.content | strip_html | truncate: 250 }}</p>
-          </div>
-        </a>
+      <a href="{{ post.url | relative_url }}" class="post-preview-box">
+        {% if post.image %}
+        <div class="post-preview-hero" style="background-image: url('{{ post.image | relative_url }}');"></div>
+        {% endif %}
+        <div class="post-preview-title">
+          <span class="post-preview-topic">{{ post.topic | default: post.project_slug | default: 'Miscellaneous'
+            }}</span>
+          <h3>{{ post.title }}</h3>
+          <span class="post-preview-date">{{ post.date | date: "%B %d, %Y" }}</span>
+        </div>
+        <div class="post-preview-content">
+          <p>{{ post.content | strip_html | truncate: 250 }}</p>
+        </div>
+      </a>
       {% endfor %}
     </div>
     <p style="margin-top: 1em;"><a href="/blog/">View all posts...</a></p>
