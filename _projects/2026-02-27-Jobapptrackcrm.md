@@ -24,5 +24,5 @@ I will not claim this is groundbreaking in any way. There are likely terribly cu
 
 So while my software engineer couple days are over, here's to hoping I land that job (and if any potential hiring managers is reading this, I won't let you down :D)
 
-Link to the github release page: https://github.com/FaultedBeing/Job-Application-CRM/releases
-(For most people, just download the .exe file, it should isntall from there and take care of everything else you may need for getting it up and running)
+[Link to the GitHub release page](https://github.com/FaultedBeing/Job-Application-CRM/releases)
+(For most people, just download the .exe file, it should install from there and take care of everything else you may need for getting it up and running)
